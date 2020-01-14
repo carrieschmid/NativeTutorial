@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+//can also use TouchableHighlight, TouchableNativeFeedback(android), Touchable without feedback
 
 const GoalItem = props => {
     return ( 
-    <View style={styles.listItem}>
-
-    <Text >{props.title}</Text>
-  </View>
+        //onPress expects a function, so we are forwarding what onDelete points to 
+    <TouchableOpacity activeOpacity= {0.8} onPress={props.onDelete.bind(this, props.id)}>
+        <View style={styles.listItem} >
+        <Text >{props.title}</Text>
+        </View>
+  </TouchableOpacity>
     );
 };
 
