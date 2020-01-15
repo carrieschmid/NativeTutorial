@@ -1,4 +1,7 @@
 //you use map to transform an array of data into and array of components
+//command m, debugger in andriod, command d, debugger in ios, make sure it's set to local and not tunnel
+//debugger, step marker at step and take it step by step, hover to see the values
+//download React Native Debugger from github page(google it), give you Redux and Elements debugging tools
 import React, {useState} from 'react';
 //we are using hooks to get the user input
 import {StyleSheet, Text, View, TextInput, Button,
@@ -11,8 +14,15 @@ export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
   //we pass this to GoalInput to change the visibility of the modal
   const [isAddMode, setIsAddMode] = useState(false);
+  console.log('RE-RENDERING COMPONENT');
+  console.log(courseGoals);
+  //This will be the complete list because it's just been rendered
 
   const addGoalHandler = goalTitle => {
+    //this ignores user input if it's empty
+    if (goalTitle.length === 0){
+      return;
+    }
     //the ... pulls all the content out of the old array and puts it in a new array in the [] as the new element enteredGoal
     //your get your currentGoals(currentState) and set it to what was returned when the course value was updated, because it give latest snapshot before it applies the state change
     //now courseGoals is an array of objects
@@ -26,6 +36,8 @@ export default function App() {
   };
 
   const removeGoalHandler = goalId => {
+    console.log('TO BE DELETED:' + goalId);
+    console.log(courseGoals);
     setCourseGoals(currentGoals => {
       return currentGoals.filter(goal => goal.id !== goalId);
       //returns new array filered by a certain criteria (a function passed to filter), to keep all that do not match the goalId
